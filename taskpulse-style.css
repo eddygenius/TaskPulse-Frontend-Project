@@ -169,24 +169,19 @@ nav .container {
 .hero-mockup {
     width: 100%;
     height: 400px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border-radius: 20px;
     box-shadow: 0 25px 50px rgba(102, 126, 234, 0.3);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
-    font-size: 24px;
-    font-weight: 600;
     position: relative;
     overflow: hidden;
 }
 
-.hero-mockup::before {
-    content: '📊';
-    font-size: 120px;
-    opacity: 0.3;
-    position: absolute;
+.dashboard-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 /* Trust Bar */
@@ -252,6 +247,14 @@ nav .container {
     background: #f7fafc;
     border-radius: 15px;
     transition: transform 0.3s, box-shadow 0.3s;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.feature-card.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .feature-card:hover {
@@ -298,6 +301,14 @@ nav .container {
 .step {
     text-align: center;
     position: relative;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.step.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .step-number {
@@ -330,6 +341,74 @@ nav .container {
     background: white;
 }
 
+.pricing-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.toggle-label {
+    font-weight: 600;
+    color: #4a5568;
+}
+
+.savings-badge {
+    background: #48bb78;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-left: 5px;
+}
+
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #cbd5e0;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .toggle-slider {
+    background-color: #667eea;
+}
+
+input:checked + .toggle-slider:before {
+    transform: translateX(30px);
+}
+
 .pricing-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -344,6 +423,14 @@ nav .container {
     border-radius: 15px;
     transition: transform 0.3s, box-shadow 0.3s;
     position: relative;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.pricing-card.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .pricing-card:hover {
@@ -392,6 +479,18 @@ nav .container {
     font-weight: 400;
 }
 
+.yearly-price {
+    display: none;
+}
+
+.pricing-toggle:has(input:checked) ~ .pricing-grid .monthly-price {
+    display: none;
+}
+
+.pricing-toggle:has(input:checked) ~ .pricing-grid .yearly-price {
+    display: inline;
+}
+
 .pricing-features {
     list-style: none;
     margin: 30px 0;
@@ -415,6 +514,157 @@ nav .container {
 
 .pricing-card.featured .pricing-features li:before {
     color: #a3e635;
+}
+
+/* Contact Section */
+.contact {
+    padding: 100px 0;
+    background: linear-gradient(135deg, #f6f9fc 0%, #ffffff 100%);
+}
+
+.contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    margin-top: 60px;
+}
+
+.contact-info h3 {
+    font-size: 24px;
+    margin-bottom: 30px;
+    color: #1a202c;
+}
+
+.contact-item {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.contact-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.contact-item h4 {
+    font-size: 18px;
+    margin-bottom: 5px;
+    color: #1a202c;
+}
+
+.contact-item p {
+    color: #718096;
+}
+
+.contact-form {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #4a5568;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.error-message {
+    color: #e53e3e;
+    font-size: 14px;
+    margin-top: 5px;
+    display: block;
+}
+
+/* Success Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 40px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #a0aec0;
+}
+
+.close-modal:hover {
+    color: #4a5568;
+}
+
+.success-icon {
+    width: 80px;
+    height: 80px;
+    background: #48bb78;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    margin: 0 auto 20px;
+}
+
+.modal-content h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #1a202c;
+}
+
+.modal-content p {
+    color: #718096;
+    margin-bottom: 25px;
 }
 
 /* CTA Section */
@@ -518,6 +768,10 @@ footer {
 
     .pricing-card.featured {
         transform: scale(1);
+    }
+
+    .contact-content {
+        grid-template-columns: 1fr;
     }
 }
 
